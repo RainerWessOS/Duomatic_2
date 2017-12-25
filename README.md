@@ -8,6 +8,9 @@ Works on all modern browsers. Game can be played on touch-devices like smartfone
 
 Now with multi-language support for: de, en, fr, es, pt, it, nl, sv. The game starts automatically in the language of your browser.
 
+Screenshot of the game:
+
+<img src="https://github.com/RainerWessOS/Duomatic_2/blob/master/Duomatic_2_DE.png" alt="Screemshot of Daddelkisze Duomatic 2" />
 
 Copyright (C) 2017 Rainer Wess, Osnabrück, Germany
 
