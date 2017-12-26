@@ -1,5 +1,5 @@
 /*
- *      Daddelkiste Duomatic Version 0.94
+ *      Daddelkiste Duomatic Version 0.95
  *      Javascript implementation of an "Advanced Slot Machine"
  *
  *      Copyright  2017 Rainer Wess, Osnabrück, Germany
@@ -364,8 +364,8 @@ function zeige_Spiele() {
 	id("Spiele").value = String(ss);
 }
 
-function zeige_Einsatz() {
-	id("Einsatz").value = String(einsatz);
+function zeige_Einsatz(esatz) {
+	id("Einsatz").value = String(esatz);
 }
 
 function zeige_Feld(nr, status) {
@@ -423,6 +423,8 @@ function reset() {
 	zeige_Gewinn();
 	ss = 0;
 	zeige_Spiele();
+	zeige_Einsatz(einsatz);
+	
 	loadSettings();
 	change_game_mode(game_mode);
 	change_color_theme(color_theme);
@@ -517,7 +519,8 @@ function stop_Scheibe_2() {
         
        if (s1 == 1 && s2 == 1 && s3 == 1)  {
                win = win_or_loose();
-               if (win)  s2  = 13;
+               if (!win)  s2  = 13; 
+/* !win = wer dIe Risikowahrscheinlichkeit hochgestellt hat bekommt seltener Multi- oder Megaspiele */
         }
         
 		zeige_Scheibe(2, s2);
@@ -743,17 +746,14 @@ function starte_Spiel() {
 	auto_annahme = id("auto_annahme").value;
 	if (punkte >= einsatz) {
 		spiel_laueft_noch = true;
-		if (megaspiel) { 
-			 setInfo("* * Megaspiel * *");
-		}
 		if (multispiel) { 
-			 setInfo("* * Freispiel * *");
+			 zeige_Einsatz(" Freispiel ");
 		}
 		else {
              punkte = punkte - einsatz;
-             setInfo(" ");
              audio_play("abbuchen");
         }
+        setInfo(" ");
 		zeige_Punkte();
 		zeige_Gewinn();
 		zeige_Felder(0, 31, 0);
@@ -778,6 +778,7 @@ function starte_Spiel() {
 			sonderspiel = false;
 			multispiel = false;
 			megaspiel = false;
+		    zeige_Einsatz(einsatz);
 			clearInterval(intS);
 			if(games) setText("L_Spiele", plfText[4]);
 			setColor("L_Spiele", rot);
@@ -903,19 +904,27 @@ function Gewinn_annehmen() {
 		if (risikophase) stop_Risiko();
 		if (!hoechststufe) audio_stop();
 		if (ss_neu > 0) {
+			info = infoText[12] + ss_neu + infoText[17];
 			if (ss_neu > 19) {
+				if (multispiel) {
+					setInfo(infoText[12] + ss_neu + infoText[27]);
+				}
+				else {
 				setInfo(infoText[12] + ss_neu + infoText[15]);
+				}
 			}
 			if(multispiel) { 
+				info = infoText[12] + ss_neu + infoText[27];
                 setText("L_Spiele", plfText[7]);
 			}
 			if(megaspiel) { 
+				info = infoText[12] + ss_neu + infoText[26];
                 setText("L_Spiele", plfText[9]);
 			}
 			if (ss == 0 && !sonderspiel) {
 				intS = setInterval(ani_ss, 800);
 			}
-			info = infoText[12] + ss_neu + infoText[17];
+			
 			steptime = 100;
 		}
 		else if (gewinn > 0) {

@@ -1,5 +1,5 @@
 /*
-*      Daddelkiste Duomatic Version 0.94
+*      Daddelkiste Duomatic Version 0.95
 *      Javascript implementation of an "Advanced Slot Machine"
 *
 *      Copyright  2017 Rainer Wess, Osnabrück, Germany
