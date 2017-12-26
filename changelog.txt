@@ -4,6 +4,11 @@ Punkte-Mode: Multiplikator für höhere Einsatze implementieren
 
 changelog:
 
+Version 0.95  2017.12.25
+Simulation erweitert:
+Spielarten jetzt entweder mit Sonder- und Multispielen oder mit Punkten und Megaspielen.
+Lautsstärke jetzt einstellbar
+
 Version 0.94  2017.12.04
 Scheibensteuerung verbessert 
 (restart Scheibe 1, die anderen stoppen schneller)
