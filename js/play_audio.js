@@ -66,9 +66,19 @@ var audio_play = function(id) {
     	audioSprite.pause();
         currentSprite = spriteData[id];
         audioSprite.currentTime = currentSprite.start;
-        audioSprite.play();
+        var playPromise = audioSprite.play();
+          
+        if (playPromise !== undefined) {
+             playPromise.then(_ => {
+                  // Automatic playback started!
+             })
+            .catch(error => {
+                  // Auto-play was prevented
+             });
+        }
     }
 };
+
 
 // sometimes, we want it just quiet and don't care which sprite is playing
 var audio_stop = function() {
