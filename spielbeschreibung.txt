@@ -13,7 +13,8 @@ Die AutoStart Automatik startet die linke Scheibe einmal neu, wenn keine Sonne e
 Zeigen die Scheiben 3x den gleichen Betrag oder 2x den gleichen
 Betrag und Sonne auf der mittleren Scheibe, wird dieser gewonnen. Gibt es zwei Gewinnkombinationen - nur bei Sonne in der Mitte möglich- , wird der höhere Gewinn gegeben.
 
-Wenn auf den drei Scheiben jeweils eine Sonne erscheint, gibt es eine grosse Ausspielung auf der rechten Seite. Erscheinen vier Sonnen, gibt es eine grosse Ausspielung auf der linken Seite. Bei fünf Sonnen wird die große Ausspielung in der Mitte gegeben.
+Wenn auf den drei Scheiben jeweils eine Sonne erscheint, gibt es eine grosse Ausspielung auf der rechten Seite. Erscheinen vier Sonnen, gibt es eine grosse Ausspielung auf der linken Seite. Bei fünf Sonnen wird die große Ausspielung in der Mitte gegeben. 
+Bei 6 Sonnen (Doppelsonne auf der mittleren Scheibe) gib es je eine Multi-Ausspielung, gewonnen werden dann 50, 100 oder 40 Multi-Spiele. Wird im "Nur Punkte"-Modus gespielt können dort 3, 4 oder 7 Mega-Spiele gewonnen werden. Im Mega-Spiel wird bei jedem Gewinn eine grosse Ausspielung gegeben.
 
 Alle Gewinne können risikiert werden. Gewinne oberhalb des Mindestgewinns der jeweiligen Risikoleiter können geteilt werden, auch mehrmals nacheinander, so oft gewünscht. Nach dem Teilen wird dann eine Stufe tiefer zum Risiko angeboten und die Differenz wird auf dem jeweilen Punkte- oder Sonderspiele-Zähler aufgezählt.
 

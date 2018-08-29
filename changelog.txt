@@ -5,7 +5,7 @@ Punkte-Mode: Multiplikator für hóhere Einsatze implementieren
 changelog:
 
 Version 1.0  2018.08.29
-final Release
+Final Version 1.0 released
 
 Version 0.95  2017.12.25
 Simulation erweitert:
