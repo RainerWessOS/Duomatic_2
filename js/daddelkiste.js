@@ -1,8 +1,8 @@
 /*
- *      Daddelkiste Duomatic Version 0.95
+ *      Daddelkiste Duomatic Version 1.0
  *      Javascript implementation of an "Advanced Slot Machine"
  *
- *      Copyright  2017 Rainer Wess, Osnabrück, Germany
+ *      Copyright  2018 Rainer Wess, Osnabrück, Germany
  *      Open Source / Freeware - released under GPL 2
  */
 var geld = 0;
@@ -327,10 +327,10 @@ function loadSettings() {
 	if (localStorage.spiel_tempo) {
 		spiel_tempo = Number(localStorage.spiel_tempo);
 	}
-	if (localStorage.spiel_tempo) {
+	if (localStorage.auto_risiko) {
 		auto_risiko = Number(localStorage.auto_risiko);
 	}
-	if (localStorage.spiel_tempo) {
+	if (localStorage.auto_annahme) {
 		auto_annahme = Number(localStorage.auto_annahme);
 	}
 	id("risiko_win").value = risiko_win;

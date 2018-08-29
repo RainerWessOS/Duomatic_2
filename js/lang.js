@@ -1,9 +1,9 @@
 
 /*
-*      Daddelkiste Duomatic Version 0.95
+*      Daddelkiste Duomatic Version 1.0
 *      Javascript implementation of an "Advanced Slot Machine"
 *
-*      Copyright  2017 Rainer Wess, Osnabrück, Germany
+*      Copyright  2018 Rainer Wess, OsnabrÃ¼ck, Germany
 *      Open Source / Freeware - released under GPL 2.0
 */
 
@@ -128,7 +128,7 @@ break;
 
 case "fr":
 
-// Französisch
+// Franzï¿½sisch
 
 infoText = [
 "Parametres enregistres",
@@ -149,7 +149,7 @@ infoText = [
 " JEUX SPECIAUX",
 " POINTS - accepte",
 " JEUX SPECIAUX - accepte",
-"Le bénéfice n'est pas divisible",
+"Le bï¿½nï¿½fice n'est pas divisible",
 "Le niveau maximum n'est pas divisible",
 "GRAND PLAYOUT bon site",
 "GRAND PLAYOUT quitte le site",
@@ -164,7 +164,7 @@ infoText = [
 btnText = [
 "DeBUT",
 "AutoStart",
-"ARRÊT",
+"ARRï¿½T",
 "RISQUE",
 "DIVISe",
 "PRENDRE",
@@ -308,7 +308,7 @@ break;
 
 case "nl":
 
-// Niederländisch
+// Niederlï¿½ndisch
 
 infoText = [ 
 "Instellingen opgeslagen",
