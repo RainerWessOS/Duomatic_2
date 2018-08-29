@@ -1,4 +1,4 @@
-/* Stylesheet for Daddelkiste Duomatic - Version 0.94 */
+/* Stylesheet for Daddelkiste Duomatic - Version 1.0 */
 
 body {
   margin: 0px;
@@ -37,11 +37,12 @@ von hidden auf visible setzen */
 }
 	
 #Geraet {
-  border: 0;
+  border: 10px solid #333333;
+  border-radius: 10px;
+  border-collapse: collapse;
+  top: 10px;
   padding: 0;
   spacing: 0;
-  border-collapse: collapse;
-  border: 10px solid #333333;
   background-color: #111111;
 }
 
@@ -100,6 +101,29 @@ von hidden auf visible setzen */
   background-repeat: no-repeat;
 }
 
+.red_oben {
+	border-top: 3px solid red;
+}
+
+.red_unten {
+	border-bottom: 3px solid red;
+}
+
+.red_links{
+	border-left: 3px solid red;
+}
+
+.red_rechts {
+	border-right: 3px solid red;
+}
+
+.gold_rechts {
+	border-right: 3px solid gold;
+}
+
+.gold_links {
+	border-left: 3px solid gold;
+}
 .risikofeld {
   background-image: url("images/risiko_passiv.gif");
   background-position: center;
@@ -342,12 +366,12 @@ main {
   color: white;
   text-align: left;
   align: center;
-  width: 720px; // 750
+  width: 725px; // 750
   z-index: 5;
   background: #005500;
   border: 2px solid #F00;
-  top: 0px;
-  left: -5px;
+  top: -5px;
+  left: -10px;
 }
 
 .overlayHidden {
