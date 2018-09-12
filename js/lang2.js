@@ -20,14 +20,17 @@
     
  var lang = navigator.language.substring(0,2);
 
-var infoText = [];
-var btnText = [];
-var plfText = [];
-var cfgText = [];
-var c_instr = " ";
-var c_think = " ";
-var c_github = " ";
-var c_hint = " ";
+var infoText = [];      // Text for the info span
+var btnText = [];       // Text on Buttons
+var plfText = [];        // Text on the playfield
+var navText = [];    // Text navbar overlay page
+var cfgText1 = [];    // Text settings page left side
+var cfgText2 = [];      // Text settings page right side
+var alertText = [];      // Text in alert messages
+var c_instr = " ";      // Text on instruction page
+var c_think = " ";     // Text on technical data page
+var c_github = " ";  // Text on about page
+var c_hint = " ";      // Text on about page
 
 switch (lang) {
 	
@@ -43,11 +46,11 @@ infoText = [
 "Guthaben wird auf Punktespeicher &uuml;bertragen",
 "Zum Starten START-Taste dr&uuml;cken",
 "Startautomatik AUS",
-"Startautomatik AN",
+"Startautomatik EIN",
 "Autostart AUS",
-"Autostart AN",
+"Autostart EIN",
 "Risikoautomatik AUS",
-"Risikoautomatik AN",
+"Risikoautomatik EIN",
 "Risikostufe rechte Seite gesetzt",
 "Risikostufe linke Seite gesetzt",
 "Gewinn: " ,
@@ -76,14 +79,7 @@ btnText = [
 "TEILEN",
 "ANNEHMEN",
 "Geldeinwurf +10",
-"Einstellungen",
-"Schliessen",
-"Multi-Spiele",
-"Mega-Punkte",
-"Gruen",
-"Blau",
-"Petrol",
-"Schwarz"
+"Einstellungen"
 ];
 
 plfText = [
@@ -91,7 +87,7 @@ plfText = [
 "Duomatic",
 "GELD",
 "PUNKTE",
-"SONDERSPIELE",
+"S-SPIELE",
 "GEWINN",
 "EINSATZ",
 "MULTI-SPIELE",
@@ -99,28 +95,51 @@ plfText = [
 "MEGA-SPIELE"
 ];
 
-cfgText = [
+navText = [
 "Einstellungen:",
 "Anleitung:",
 "Technische Daten:",
 "&Uuml;ber das Spiel:",
-"Art des Spiels - Duomatic:",
-"Farbschema / Ger&auml;tefarbe:",
+"Einstellungen speichern",
+"Schliessen"
+];
+
+cfgText1= [
+"Art des Spiels:",
+"Multi-Spiele",
+"Mega-Punkte",
+"Ger&auml;tefarbe:",
+"Gr&uuml;n",
+"Blau",
+"Petrol",
+"Schwarz",
+"Energie sparen:",
+"Audio AUS"
+];
+
+cfgText2 = [
 "Gewinnwahrscheinlichkeit bei Risiko:",
 "Spielablaufdauer:  < schnell -- langsam >",
 "Risikoautomatik setzt ein nach:",
 "Automatische Gewinnannahme nach:",
-" Sekunden",
-"Lautst&auml;rke:"
+"Lautst&auml;rke:",
+" Sekunden"
 ];
 
-c_instr = "Simulation eines Geldspielautomaten mit drei Scheiben, die in der Reihenfolge links, rechts, mitte stoppen. Die linke Scheibe kann einmal nachgestartet, die beiden anderen k&ouml;nnen gestoppt werden.<p>Die Startatomatik wird ein- bzw. ausgeschaltet, indem w&auml;hrend des bereits laufenden Spiels die Start-Taste bet&auml;tigt wird. Mit Startautomatik startet das n&auml;chste Spiel automatisch.<p>Mit der mittleren Taste kann die AutoStart Automatik ein- und aus geschaltet werden, die die linke Scheibe einmal neu startet, wenn keine Sonne erschienen ist.<p>Zeigen die Scheiben 3x den gleichen Betrag oder 2x den gleichen Betrag und die Sonne auf der mittleren Scheibe, wird dieser gewonnen. Gibt es zwei Gewinnkombinationen - nur bei Sonne in der Mitte m&ouml;glich- , wird der h&ouml;here Gewinn gegeben.<p>Wenn auf den drei Scheiben jeweils eine Sonne erscheint, gibt es eine grosse Ausspielung auf der rechten Seite. Erscheinen vier Sonnen, gibt es eine grosse Ausspielung auf der linken Seite. Bei f&uuml;nf Sonnen wird die grosse Ausspielung in der Mitte gegeben. Bei 6 Sonnen (Doppelsonne auf der mittleren Scheibe) gib es je eine Multi-Ausspielung, gewonnen werden dann 50, 100 oder 40 Multi-Spiele. Wird im Nur Punkte-Modus gespielt k&ouml;nnen dort 3, 4 oder 7 Mega-Spiele gewonnen werden. Im Mega-Spiel wird bei jedem Gewinn eine grosse Ausspielung gegeben.<p>Alle Gewinne k&ouml;nnen risikiert werden. Gewinne oberhalb des Mindestgewinns der jeweiligen Risikoleiter k&ouml;nnen geteilt werden, auch mehrmals nacheinander, so oft gew&uuml;nscht. Nach dem Teilen wird dann eine Stufe tiefer zum Risiko angeboten und die Differenz wird auf dem Punkte- bzw. Sonderspiel-Z&auml;hler aufgez&auml;hlt.<p>Es kann eine Risiko-Automatik eingeschaltet werden, die jeden Gewinn risikiert. Die H&ouml;he bis zu der automatisch riskiert werden soll ist frei einstellbar, indem bei eingeschalteter Risikoautomatik auf die entsprechenden Felder auf der rechten und linken Risikoleiter getippt bzw. geklickt wird. Die eingestellte H&ouml;he ist an dem kleinen hellgr&uuml;nen Balken im jeweiligen Risikofeld ersichtlich.<p><b>F&uuml;r den Spielmodus mit Sonderspielen gilt zus&auml;tzlich folgendes:</b><p>Im Sonderspiel werden bei Gewinnkombination und bei  gestreiften Feldern auf der mittleren Scheibe 200 Punkte gewonnen. In Sonderspielen kann nur bei Sonne auf der mittleren Scheibe, oder bei bei einem Sonderspielz&auml;hlerstand kleiner als 10 riskiert werden, wobei 40 Punkte gleich angenommen und der Rest zum Risiko angeboten wird.  Es k&ouml;nnen unbegrenzt viele Sonderspiele gewonnen werden. Wird bei Ablauf von Sonderspielen kein Gewinn erzielt, bleibt der Sonderspielz&auml;hler auf 1, bis  gewonnen wird.<p>";
+alertText = [
+"Die Einstellungen wurden gespeichert.\n",
+"Die Einstellungen konten nicht gespeichert werden. \n\nDer Browser unterstützt entweder keinen localStorage oder der Zugriff darauf wurde vom Nutzer eingeschränkt.\n",
+"Hinweis:\n\nDie für die automatische Gewinnannahme eingestellte Zeit sollte grösser als die für die Risikoautomatik eingestellte Zeit sein, denn sonst wird der Gewinn angenommen bevor die Risikoautomatik auslösen kann.\n",
+"Die Einstellungen brauchen nur gespeichert werden, wenn du bei jedem Aufruf der Webseite mit diesen Einstellungen spielen möchtest - fürs laufende Spiel werden sie automatisch übernommen."
+];
 
-c_think = 'Daddelkiste hat einen vorgegebenen Spielablauf, aber wo die Scheiben stoppen, das Ergebnis einer Ausspielung, oder ob im Risiko gewonnen wird, h&auml;ngt rein vom Zufall also Wahrscheinlichkeiten ab.<p>Jede Scheibe hat 12 Positionen, damit ergibt sich die Wahrscheinlichkeit eine grosse Ausspielung in der Mitte zu bekommen: 1/12 *1/12 *1/12 = 1/1728 Im Durchschnitt also einmal alle 1728 Spiele.<p>F&uuml;r die grossen Ausspielungen links und rechts gibt es jeweils 4 m&ouml;gliche Positionen, die Wahrscheinlichkeit ist damit 1/432, jede von ihnen l&auml;uft also etwa jedes 432 Spiel ein.<p>Da diese Spielautomatensimulation rein der Unterhaltung dient bleiben Ausspielungen wesentlich h&auml;ufiger auch mal "oben" stehen, als in der Spielo. Soll ja auch Spass machen!<p>Hier die Prozentangaben f&uuml;r die Ausspielungen:<p>Grosse Ausspielung Mitte:<br>10 S - 25%, 12 S - 25%, 20 S - 15%, 25 S - 15%, 40 S - 5%, 50 S - 5%, 90 S - 5%, 100 S - 5%<p>Grosse Ausspielung Links:<br>3 S - 50%, 6 S - 15%, 12 S - 10%, 25 S - 10%, 50 S - 10%, 100 S - 5%<p>Grosse Ausspielung Rechts:<br>240 P - 50%, 5 S - 15%, 10 S - 10%, 20 S - 10%, 40 S - 10%, 90 S - 5%<p>Ich pers&ouml;nlich w&uuml;rde nicht in der Spielo zocken. Zum einen weil es mir zu schade um die Kohle w&auml;re, zum anderen, weil heutige Ger&auml;te fernauslesbar sind. Da kann der Aufsteller nachvollziehen was in die Ger&auml;te reingekommen ist. Und m&ouml;glicherweisd kann der Aufsteller oder der Herrsteller des Ger&auml;tes (k&ouml;nnte ja auch beides das gleiche  Unternehmen sein) auch sehen das die Kiste bald f&auml;llig ist, also eine fette Serie kommt. Da w&auml;te es denkbar ein Techniker holt das oder die Ger&auml;te ab um es angeblich in einer anderen Halle auzustellen und da l&auml;uft ihm glatt in der Werkstatt die fette Serie rein. Nur mal so, in welche Richtung das gehen *k&ouml;nnte*. Habe sowas schon  vor 20 Jahren von einer sehr guten Freundin geh&ouml;rt, die Hallenleitung war.<p>';
+c_instr = "Simulation eines Geldspielautomaten mit drei Scheiben, die in der Reihenfolge links, rechts, mitte stoppen. Die linke Scheibe kann einmal nachgestartet, die beiden anderen k&ouml;nnen gestoppt werden.<p>Die Startautomatik wird ein- bzw. ausgeschaltet, indem w&auml;hrend des bereits laufenden Spiels die Start-Taste bet&auml;tigt wird. Mit Startautomatik startet das n&auml;chste Spiel automatisch.<p>Mit der mittleren Taste kann die AutoStart Automatik ein- und aus geschaltet werden, die die linke Scheibe einmal neu startet, wenn keine Sonne erschienen ist.<p>Zeigen die Scheiben 3x den gleichen Betrag oder 2x den gleichen Betrag und die Sonne auf der mittleren Scheibe, wird dieser gewonnen. Gibt es zwei Gewinnkombinationen - nur bei Sonne in der Mitte m&ouml;glich- , wird der h&ouml;here Gewinn gegeben.<p>Wenn auf den drei Scheiben jeweils eine Sonne erscheint, gibt es eine grosse Ausspielung auf der rechten Seite. Erscheinen vier Sonnen, gibt es eine grosse Ausspielung auf der linken Seite. Bei f&uuml;nf Sonnen wird die grosse Ausspielung in der Mitte gegeben. Bei 6 Sonnen (Doppelsonne auf der mittleren Scheibe) gib es je eine Multi-Ausspielung, gewonnen werden dann 50, 100 oder 40 Multi-Spiele. Wird im Nur Punkte-Modus gespielt k&ouml;nnen dort 3, 4 oder 7 Mega-Spiele gewonnen werden. Im Mega-Spiel wird bei jedem Gewinn eine grosse Ausspielung gegeben.<p>Alle Gewinne k&ouml;nnen risikiert werden. Gewinne oberhalb des Mindestgewinns der jeweiligen Risikoleiter k&ouml;nnen geteilt werden, auch mehrmals nacheinander, so oft gew&uuml;nscht. Nach dem Teilen wird dann eine Stufe tiefer zum Risiko angeboten und die Differenz wird auf dem Punkte- bzw. Sonderspiel-Z&auml;hler aufgez&auml;hlt.<p>Es kann eine Risiko-Automatik eingeschaltet werden, die jeden Gewinn risikiert. Die H&ouml;he bis zu der automatisch riskiert werden soll ist frei einstellbar, indem bei eingeschalteter Risikoautomatik auf die entsprechenden Felder auf der rechten und linken Risikoleiter getippt bzw. geklickt wird. Die eingestellte H&ouml;he ist an dem kleinen hellgr&uuml;nen Balken im jeweiligen Risikofeld ersichtlich.<p><b>F&uuml;r den Spielmodus mit Sonderspielen gilt zus&auml;tzlich folgendes:</b><p>Im Sonderspiel werden bei Gewinnkombination und bei  gestreiften Feldern auf der mittleren Scheibe 200 Punkte gewonnen. In Sonderspielen kann nur bei Sonne auf der mittleren Scheibe, oder bei bei einem Sonderspielz&auml;hlerstand kleiner als 10 riskiert werden, wobei 40 Punkte gleich angenommen und der Rest zum Risiko angeboten wird.  Es k&ouml;nnen unbegrenzt viele Sonderspiele gewonnen werden. Wird bei Ablauf von Sonderspielen kein Gewinn erzielt, bleibt der Sonderspielz&auml;hler auf 1, bis  gewonnen wird. Bei Gewinn von Multi-Spielen werden bereits vorhandene Sonderspiele automatisch in Multi-Spiele umgewandelt. W&auml;hrend der Multi-Serie hinzugewonnene Sonderspiele sind  Multi-Spiele.<p>";
 
-c_github = "Die aktuellste Version findest du auf Github.com:";
+c_think = 'Daddelkiste hat keinen vorgegebenen Spielablauf, wo die Scheiben stoppen, das Ergebnis einer Ausspielung, oder ob im Risiko gewonnen wird, h&auml;ngt rein vom Zufall also Wahrscheinlichkeiten ab.<p>Jede Scheibe hat 12 Positionen, damit ergibt sich die Wahrscheinlichkeit eine grosse Ausspielung in der Mitte zu bekommen: 1/12 *1/12 *1/12 = 1/1728 Im Durchschnitt also einmal alle 1728 Spiele.<p>F&uuml;r die grossen Ausspielungen links und rechts gibt es jeweils 4 m&ouml;gliche Positionen, die Wahrscheinlichkeit ist damit 1/432, jede von ihnen l&auml;uft also etwa jedes 432 Spiel ein.<p>Da diese Spielautomatensimulation rein der Unterhaltung dient bleiben Ausspielungen etwas h&auml;ufiger auch mal "oben" stehen, als in der Spielo. Soll ja auch Spass machen!<p>Hier die Prozentangaben f&uuml;r die Ausspielungen:<p>Grosse Ausspielung Mitte:<br>10 S - 25%, 12 S - 25%, 20 S - 15%, 25 S - 15%, 40 S - 5%, 50 S - 5%, 90 S - 5%, 100 S - 5%<p>Grosse Ausspielung Links:<br>3 S - 50%, 6 S - 30%, 12 S - 10%, 25 S - 5%, 50 S - 3%, 100 S - 2%<p>Grosse Ausspielung Rechts:<br>240 P - 50%, 5 S - 30%, 10 S - 10%, 20 S - 5%, 40 S - 3%, 90 S - 2%<p>Ich pers&ouml;nlich w&uuml;rde nicht in der Spielo zocken. Zum einen weil es mir zu schade um die Kohle w&auml;re, zum anderen, weil heutige Ger&auml;te fernauslesbar sind. Da kann der Aufsteller nachvollziehen was in die Ger&auml;te reingekommen ist. Und m&ouml;glicherweisd kann der Aufsteller oder der Herrsteller des Ger&auml;tes (k&ouml;nnte ja auch beides das gleiche  Unternehmen sein) auch sehen das die Kiste bald f&auml;llig ist, also eine fette Serie kommt. Da w&auml;te es denkbar ein Techniker holt das oder die Ger&auml;te ab um es angeblich in einer anderen Halle auzustellen und da l&auml;uft ihm glatt in der Werkstatt die fette Serie rein. Nur mal so, in welche Richtung das gehen *k&ouml;nnte*. Habe sowas schon  vor 20 Jahren von einer sehr guten Freundin geh&ouml;rt, die Hallenleitung war.<p>';
 
-c_hint = "Daddelkiste wird von mir nicht mehr weiter entwickelt. Wer mag, kann das Projekt weiterf&uuml;hren. <br>Der Quellcode ist leicht verst&auml;ndlich und gut kommentiert.";
+c_github = "Die aktuelle Version findest du auf Github.com:";
+
+c_hint = "Daddelkiste wird von mir nicht mehr weiter entwickelt. Wer mag, kann das Projekt weiterf&uuml;hren. Der Quellcode ist leicht verst&auml;ndlich und gut kommentiert.";
 
 break;
 
@@ -164,19 +183,12 @@ infoText = [
 btnText = [
 "DeBUT",
 "AutoStart",
-"ARR�T",
+"ARRET",
 "RISQUE",
 "DIVISe",
 "PRENDRE",
 "inserer 10 pieces",
-"Parametres",
-"Fermer",
-"Multi-Games",
-"Mega-Points",
-"Green",
-"Blue",
-"Petrol",
-"Black"
+"Parametres"
 ];
 
 plfText = [
@@ -192,19 +204,42 @@ plfText = [
 "MEGA JEUX"
 ];
 
-cfgText = [
+navText = [
 "Parametres:",
 "Instructions:",
 " ",
 "Sur le jeu:",
+"registre Parametres",
+"Fermer"
+];
+
+cfgText1= [
 "Types de jeu:",
+"Multi-Games",
+"Mega-Points",
 "Coleur de dispositif:",
+"Green",
+"Blue",
+"Petrol",
+"Black",
+"Save Energy:",
+"Audio OFF"
+];
+
+cfgText2 = [
 "Pourcentage de gain de risque:",
 "Vitesse de jeu:  < rapide -- lente >",
 "Risque automatique engage apres:",
 "Acceptation gagnante automatique apres:",
-" Secondes",
-"Controle du Volume:"
+"Controle du Volume:",
+" Secondes"
+];
+
+alertText = [
+"Settings saved.\n",
+"Could not save settings. \n\nPossible reasons: Your browser does not support localStorage or access is denied per user configuration.\n",
+"Hint: \n\nThe value for the automatic acceptance should be bigger than the value for the automatic risk, else the win is accepted before the automatic risk can engage.\n",
+"You just need to save the settings if you want this settings for everytime you start this game - for the running game the settings take effect immediatly."
 ];
 
 c_instr = "Cette simulation d'une machine a sous fonctionne exactement comme celle de l'arcade a penny. Lorsque le demarrage automatique est active, les jeux sont automatiquement lances. Le demarrage automatique redemarre le premier disque quand il n'y a pas de soleil. -automatic va risquer la victoire jusqu'au niveau de risque defini, si active, en cliquant sur le champ dans l'echelle de risque gauche ou droite La hauteur de consigne est indiquee par la petite barre vert clair dans le champ de risque respectif. ";
@@ -258,14 +293,8 @@ btnText = [
 "RISCHIO",
 "SPLIT",
 "ACCETTO",
-"Inserisci denaro +10", "Impostazioni",
-"Chiudi",
-"Giochi Speciali",
-"Punti",
-"Green",
-"Blue",
-"Petrol",
-"Black"
+"Inserisci denaro +10", 
+"Impostazioni"
 ]; 
 
 plfText = [
@@ -281,20 +310,43 @@ plfText = [
 "MEGA-GIOCHI"
 ]; 
 
-cfgText = [
+navText = [
 "Impostazioni",
 "Istruzioni:",
 " ",
 "Note sul gioco:",
+"salvare Impostazioni",
+"Chiudi"
+];
+
+cfgText1= [
 "Tipi di gioco:",
+"Giochi Speciali",
+"Punti",
 "Colore del dispositivo",
+"Green",
+"Blue",
+"Petrol",
+"Black",
+"Save Energy:",
+"Audio OFF"
+];
+
+cfgText2 = [
 "Probabilita di profitto a rischio:",
 "Durata del gioco: < veloce - lento >",
 "Controllo automatico dei rischi",
 "Accettazione automatica dei profitti dopo:",
-" Secondi",
-"Regolatore di volume:"
+"Regolatore di volume:",
+" Secondi"
 ]; 
+
+alertText = [
+"Settings saved.\n",
+"Could not save settings. \n\nPossible reasons: Your browser does not support localStorage or access is denied per user configuration.\n",
+"Hint: \n\nThe value for the automatic acceptance should be bigger than the value for the automatic risk, else the win is accepted before the automatic risk can engage.\n",
+"You just need to save the settings if you want this settings for everytime you start this game - for the running game the settings take effect immediatly."
+];
 
 c_instr = "Questa simulazione di una macchina da gioco funziona esattamente come in sala giochi. Con attivato automaticamente avviare l'automatich giri. avvio lancia il primo disco nuovo quando c'e il sole. Il rischio automatica rischia il profitto fino al livello stabilito di rischio. questo e quando attivo, impostato cliccando sulla casella sul gestore rischio sinistra o destra dovrebbe essere fino al rischiava automaticamente il livello impostato e visibile al piccolo fascio verde brillante nella rispettiva zona di rischio.";
 
@@ -308,7 +360,7 @@ break;
 
 case "nl":
 
-// Niederl�ndisch
+// Niederlaendisch
 
 infoText = [ 
 "Instellingen opgeslagen",
@@ -349,14 +401,7 @@ btnText = [
 "AANDEEL",
 "NEMEN",
 "Geldstorting +10",
-"Instellingen",
-"Sluiten",
-"Multi-Games",
-"Mega-Points",
-"Green",
-"Blue",
-"Petrol",
-"Black"
+"Instellingen"
 ]; 
 
 plfText = [
@@ -372,20 +417,43 @@ plfText = [
 "Mega-Spellen"
 ]; 
 
-cfgText = [ 
+navText = [
 "Instellingen:",
 "Instructies:",
 " ",
 "Opmerkingen over het spel:",
+"Instellingen opslagen",
+"Sluiten"
+];
+
+cfgText1= [
 "Speltypes:",
+"Multi-Games",
+"Mega-Points",
 "Kleur apparaat:",
+"Green",
+"Blue",
+"Petrol",
+"Black",
+"Save Energy:",
+"Audio OFF"
+];
+
+cfgText2 = [ 
 "Winst waarschijnlijkheid risico:",
 "Spelduur:  < snel -- langzaam >",
 "Automatische risicobeheersing:",
 "Automatische winstacceptatie na:",
-" Seconden",
-"Volumeregeling:"
+"Volumeregeling:",
+" Seconden"
 ]; 
+
+alertText = [
+"Settings saved.\n",
+"Could not save settings. \n\nPossible reasons: Your browser does not support localStorage or access is denied per user configuration.\n",
+"Hint: \n\nThe value for the automatic acceptance should be bigger than the value for the automatic risk, else the win is accepted before the automatic risk can engage.\n",
+"You just need to save the settings if you want this settings for everytime you start this game - for the running game the settings take effect immediatly."
+];
 
 c_instr = "Deze simulatie van een gaming machine werkt precies zoals in de arcade. Bij geactiveerde automatische start de spins automatich. Startup lanceert de eerste schijf weer als het geen zon is. Het risico Automatic risico's waarmee de winst tot de ingestelde niveau van het risico. dit is wanneer actief is, door te klikken op de doos op de linker- of rechterkant risicomanager moet aan de automatisch riskeerde het ingestelde niveau is te zien op het kleine heldere groene balk in het betreffende gebied van de risico's in te stellen.";
 
@@ -440,14 +508,7 @@ btnText = [
 "DIVISION",
 "TOMAR",
 "insertar 10 monedas",
-"Configuraciones",
-"Cerca",
-"Multi-Games",
-"Mega-Points",
-"Green",
-"Blue",
-"Petrol",
-"Black"
+"Configuraciones"
 ]; 
 
 plfText = [ 
@@ -463,20 +524,43 @@ plfText = [
 "MEGA-JUEGOS"
 ]; 
 
-cfgText = [
+navText = [
 "Configuraciones:",
 "Instrucciones:",
 " ",
 "Acerca de:",
+"guarda Configuraciones",
+"Cerca"
+];
+
+cfgText1= [
 "Tipos de juegos:",
+"Multi-Games",
+"Mega-Points",
 "Color del dispositivo:",
+"Green",
+"Blue",
+"Petrol",
+"Black",
+"Save Energy:",
+"Audio OFF"
+];
+
+cfgText2 = [
 "Porcentaje de ganancia de riesgo",
 "Velocidad del juego:  < rapido -- lento >",
 "Risk-automatic se compromete despues:",
 "Aceptacion ganadora automatica despues de:",
-" Segundo",
-"La intensidad de sonido:"
+"La intensidad de sonido:",
+" Segundo"
 ]; 
+
+alertText = [
+"Settings saved.\n",
+"Could not save settings. \n\nPossible reasons: Your browser does not support localStorage or access is denied per user configuration.\n",
+"Hint: \n\nThe value for the automatic acceptance should be bigger than the value for the automatic risk, else the win is accepted before the automatic risk can engage.\n",
+"You just need to save the settings if you want this settings for everytime you start this game - for the running game the settings take effect immediatly."
+];
 
 c_instr = "Esta simulacion de una maquina tragamonedas funciona igual que la de la sala de peniques. Cuando se enciende el sistema automatico de inicio, los juegos se inician automaticamente. El inicio automatico reinicia el primer disco cuando no hay sol sobre el. -automatic arriesgara la ganancia hasta el nivel de riesgo establecido. Esto se establece, si esta activo, haciendo clic en el campo de la escalera de riesgo izquierda o derecha. La altura del conjunto se indica mediante la pequena barra verde clara en el campo de riesgo correspondiente."; 
 
@@ -531,14 +615,7 @@ btnText = [
 "SHARE",
 "ACEITAR",
 "Deposito de dinheiro +10",
-"Configuracoes",
-"Fechar",
-"Multi-Games",
-"Mega-Points",
-"Green",
-"Blue",
-"Petrol",
-"Black"
+"Configuracoes"
 ];
 
 plfText = [
@@ -554,19 +631,42 @@ plfText = [
 "MEGA-JOGOS"
 ];
 
-cfgText = [ 
+navText = [
 "Configuracoes",
 "Instrucoes:",
 " ",
 "Notas sobre o jogo:",
+"salva Configuracoes",
+"Fechar"
+];
+
+cfgText1= [
 "Tipos de jogos:",
+"Multi-Games",
+"Mega-Points",
 "Cor dispositivo:",
+"Green",
+"Blue",
+"Petrol",
+"Black",
+"Save Energy:",
+"Audio OFF"
+];
+
+cfgText2 = [ 
 "Probabilidade de lucro em risco:",
 "Duracao do jogo: < rapido - lento >",
 "Controle de Risco Automatico:",
 "Aceitacao de lucro automatico apos:",
-" Segundos",
-"Controlo de volume:"
+"Controlo de volume:",
+" Segundos"
+];
+
+alertText = [
+"Settings saved.\n",
+"Could not save settings. \n\nPossible reasons: Your browser does not support localStorage or access is denied per user configuration.\n",
+"Hint: \n\nThe value for the automatic acceptance should be bigger than the value for the automatic risk, else the win is accepted before the automatic risk can engage.\n",
+"You just need to save the settings if you want this settings for everytime you start this game - for the running game the settings take effect immediatly."
 ];
 
 c_instr = "Esta simulacao de uma slot machine funciona da mesma maneira que na sala de jogos de arcade. Quando a funcao de inicio automatico e ativada, os jogos sao iniciados automaticamente. O AutoStart reinicia o primeiro disco quando nao ha sol. O mecanismo de risco automatico arrisca o lucro ate o nivel de risco definido. Isto e definido, se ativo, clicando no campo na escada de risco esquerda ou direita, que deve ser automaticamente arriscado. A altura ajustada e indicada pela pequena barra verde clara no respectivo campo de risco."; 
@@ -622,14 +722,7 @@ btnText = [
 "DELA",
 "TA",
 "satt in 10 mynt",
-"Installningar",
-"Stanga",
-"Multi-Games",
-"Mega-Points",
-"Green",
-"Blue",
-"Petrol",
-"Black"
+"Installningar"
 ]; 
 
 plfText = [ 
@@ -645,19 +738,42 @@ plfText = [
 "MEGA-SPEL"
 ]; 
 
-cfgText = [
+navText = [
 "Installningar:",
 "Instruktioner:",
 " ",
 "Handla om:",
+"sparade Installningar",
+"Stanga"
+];
+
+cfgText1= [
 "Speltyper:",
+"Multi-Games",
+"Mega-Points",
 "Enhet Faerg",
+"Green",
+"Blue",
+"Petrol",
+"Black",
+"Save Energy:",
+"Audio OFF"
+];
+
+cfgText2 = [
 "Riskvinstprocent:",
 "Spelhastighet:  < snabb -- langsam > ",
 "Risk-automatisk engagerar sig efter:",
 "Automatisk vinnande acceptans efter:",
-" Sekunder",
-"Volymkontroll:"
+"Volymkontroll:",
+" Sekunder"
+];
+
+alertText = [
+"Settings saved.\n",
+"Could not save settings. \n\nPossible reasons: Your browser does not support localStorage or access is denied per user configuration.\n",
+"Hint: \n\nThe value for the automatic acceptance should be bigger than the value for the automatic risk, else the win is accepted before the automatic risk can engage.\n",
+"You just need to save the settings if you want this settings for everytime you start this game - for the running game the settings take effect immediatly."
 ];
 
 c_instr = "Denna simulering av en spelautomat fungerar precis som den i penny arkaden. Nar startautomatiken ar paslagen startas spelen automatiskt. Autostart startar om den farsta skivan nar det inte finns nagon sol pa den. Risk-automatisk riskerar vinsten upp till den faststallda risknivan. Den har installningen ar aktiv, genom att klicka pa faltet till vanster eller hoger riskstege. Den installda hojden anges med den lilla ljusgrona faltet i respektive riskfalt. "; 
@@ -713,14 +829,7 @@ btnText = [
 "SPLIT",
 "TAKE",
 "insert 10 Coins",
-"Settings",
-"Close",
-"Multi-Games",
-"Mega-Points",
-"Green",
-"Blue",
-"Petrol",
-"Black"
+"Settings"
 ];
 
 plfText = [
@@ -736,19 +845,42 @@ plfText = [
 "MEGA-GAMES"
 ];
 
-cfgText = [
+navText = [
 "Settings:",
 "Instructions:",
 " ",
 "About the game:",
+"save Settings",
+"Close"
+];
+
+cfgText1= [
 "Type of game:",
-"Color-Theme / Device-Color:",
+"Multi-Games",
+"Mega-Points",
+"Device-Color:",
+"Green",
+"Blue",
+"Petrol",
+"Black",
+"Save Energy:",
+"Audio OFF"
+];
+
+cfgText2 = [
 "Risk winning percentage:",
 "Game duration:  < fast -- slow >",
 "Risk-automatic engages after:",
 "Automatic winning acceptance after:",
-" Seconds",
-"Volume-Control:"
+"Volume-Control:",
+" Seconds"
+];
+
+alertText = [
+"Settings saved.\n",
+"Could not save settings. \n\nPossible reasons: Your browser does not support localStorage or access is denied per user configuration.\n",
+"Hint: \n\nThe value for the automatic acceptance should be bigger than the value for the automatic risk, else the win is accepted before the automatic risk can engage.\n",
+"You just need to save the settings if you want this settings for everytime you start this game - for the running game the settings take effect immediatly."
 ];
 
 c_instr = "This simulation of a slot machine works just like the one in the penny arcade. When the start-automatic is switched on, the games are automatically started. Autostart restarts the first disc when there is no sun on it. The risk-automatic will risk the win up to the set risk level. This is set, if active, by clicking on the field on the left or right risk ladder. The set height is indicated by the small light green bar in the respective risk field.";

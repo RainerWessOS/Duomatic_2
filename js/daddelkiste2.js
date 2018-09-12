@@ -22,6 +22,11 @@ var T2_disc1;
 var T_disc2;
 var T1_disc3;
 var T2_disc3;
+// Fuer schnellen Zugriff HTML DOM Elemente
+// in Variablen speichern, werden beim init gefuellt
+var scheibe_id = [];
+var feld_id = [];
+
 // Definition der Scheibenbelegung
 // 999 = Sonne
 var disc = [];
@@ -92,10 +97,10 @@ var intH; // Interval fur Lichtanimation bei Hoechststufe
 // ************************
 // Variablen die über Einstelldialog einstellbar sind:
 // games oder points
-var game_mode = "games";
+var game_mode = 1;
 var games = true;
 // green, blue, black
-var color_theme = "green";
+var color_theme = 1;
 var risiko_win = 50; // Prozent für Gewinn bei Risiko, default 50 (Risiko 1:1)
 // dieser Wert kann nach eigenem Geschmack verändert werden
 // bei Erhöhung des Wertes läßt sich leichter Hochdrücken
@@ -103,6 +108,7 @@ var spiel_tempo = 100; // Geschwindigkeit des Spielablaufs (50,75,100,125,150)
 var auto_risiko = 4; // nach wieviel Sekunden Risikoautomatik
 // auto_risiko muss kleiner sein als auto_annahme!!!
 var auto_annahme = 6; // nach wieviel Sekunden automatische Gewinnannahme
+var volume = 90;
 // *****************
 // Farbdefinitionen für die Tasten
 var btn_rot_aus = "#660000"; // Farbe der roten Button passiv
@@ -111,24 +117,36 @@ var btn_rot_an = "#FF0000"; // Farbe der roten Button aktiv
 var btn_gelb_aus = "#806600"; // Farbe der gelben Risiko-Buttons passiv
 var btn_gelb_auto = "#B38F00"; // Farbe der gelben Button bei Automatik
 var btn_gelb_an = "#FFCC00"; // Farbe der gelben Risiko-Buttons aktiv
-var rot = "#FF0000";
+var btn_gruen_aus = "#006600";  // Geldeinwurf button
+var btn_gruen_an = "#009900";   // Geldeinwurf button
+ // Farbdefinitionen für Ausspiel- Animationen
+var rot = "#FF0000";   
 var gelb = "#FFCC00";
 // Für die Farbschemen
 var bg_gruen = "#003322";
 var bg_blau = "#002233";
 var bg_petrol = "#003030";
 var bg_black = "#000000";
-var btn_gruen_aus = "#006600";
-var btn_gruen_an = "#009900";
-var btn_blau_aus = "#2F4F4F";
-var btn_blau_an = "#4D8080";
-var btn_grau_aus = "#333333";
-var btn_grau_an = "#555555";
+
+
+
+
+ // Menu um die Ausspielungen zu testen einblenden
+    var testmode = false;
+ // var testmode = true;
 
 // nützliche kleine Helfer Funktionen
 
 function id(id) {
 	return document.getElementById(id);
+}
+
+function hideD(hid) {
+	id(hid).style.display = "none";
+}
+
+function showD(sid) {
+	id(sid).style.display = "flex";
 }
 
 function hide(hid) {
@@ -148,26 +166,51 @@ function setBgColor(sid, scolor) {
 }
 
 function setBgImg(n, i) {
-	id("feld" + n).style.backgroundImage = "url(" + Risiko[i].src + ")";
+	feld_id[n].style.backgroundImage = "url(" + Risiko[i].src + ")";
+}
+
+function setButtonIDText(bid, btext) {
+		id(bid).value = btext;
+}
+
+function setButtonColor(bid, bcolor) {
+		bid.style.backgroundColor = bcolor;
+}
+
+function setButtonText(bid, btext) {
+		bid.value = btext;
 }
 
 function setButton(bid, bcolor, btext) {
 	if (bcolor !== 0) {
-		id(bid).style.backgroundColor = bcolor;
+	     bid.style.backgroundColor = bcolor;
 	}
 	if (arguments.length == 3) {
-		id(bid).value = btext;
+		bid.value = btext;
 	}
 }
 
 function setInfo(txt) {
-	id("Info").innerHTML = txt;
+	info_id.innerHTML = txt;
 }
 
 function setText(pid, ptxt) {
 	id(pid).innerHTML = ptxt;
 }
-// Multi-Language
+
+function setTextNeu(pid, ptxt) {
+	pid.innerHTML = ptxt;
+}
+
+function setTextFelder(nr, ptxt) {
+	feld_id[nr].innerHTML = ptxt;
+}
+
+/* 
+    The following functions are nessesary
+     for Multi-Language-Support
+*/
+
 function setPfText() {
 	//setText("L_Geraet", plfText[0]);
 	//setText("L_Typ", plfText[1]);
@@ -182,81 +225,93 @@ function setPfText() {
 	setText("L_KAL", plfText[8]);
 	setText("L_KAR", plfText[8]);
 }
-// Multi-Language
-function setCfgText() {
-	setText("c1a", cfgText[0]);
-	setText("c1b", cfgText[0]);
-	setText("c1c", cfgText[0]);
-	setText("c1d", cfgText[0]);
-	setText("c2a", cfgText[1]);
-	setText("c2b", cfgText[1]);
-	setText("c2c", cfgText[1]);
-	setText("c2d", cfgText[1]);
-	setText("c3a", cfgText[2]);
-	setText("c3b", cfgText[2]);
-	setText("c3c", cfgText[2]);
-	setText("c3d", cfgText[2]);
-	setText("c4a", cfgText[3]);
-	setText("c4b", cfgText[3]);
-	setText("c4c", cfgText[3]);
-	setText("c4d", cfgText[3]);
-	setText("game_mode", cfgText[4]);
-	setText("color_theme", cfgText[5]);
-	setText("winning", cfgText[6]);
-	setText("speed", cfgText[7]);
-	setText("r_auto", cfgText[8]);
-	setText("t_auto", cfgText[9]);
-	setText("t_vol", cfgText[11]);
+
+function setBtnText() {
+	setButton(start_id, 0, btnText[0]);
+	setButton(mitte_id, 0, btnText[1]);
+	setButton(stop_id, 0, btnText[2]);
+	setButton(risiko1_id, 0, btnText[3]);
+	setButton(risiko2_id, 0, btnText[3]);
+	setButton(geldeinwurf_id, 0, btnText[6]);
+	setButton(cfg_button_id, 0, btnText[7]);
+	
+}
+
+function setNavText() {
+	setText("c1a", navText[0]);
+	setText("c1b", navText[0]);
+	setText("c1c", navText[0]);
+	setText("c1d", navText[0]);
+	setText("c2a", navText[1]);
+	setText("c2b", navText[1]);
+	setText("c2c", navText[1]);
+	setText("c2d", navText[1]);
+	setText("c3a", navText[2]);
+	setText("c3b", navText[2]);
+	setText("c3c", navText[2]);
+	setText("c3d", navText[2]);
+	setText("c4a", navText[3]);
+	setText("c4b", navText[3]);
+	setText("c4c", navText[3]);
+	setText("c4d", navText[3]);
+	setButtonIDText("saveBtn", navText[4]);
+	setButtonIDText("exit1", navText[5]);
+	setButtonIDText("exit2", navText[5]);
+	setButtonIDText("exit3", navText[5]);
+	setButtonIDText("exit4", navText[5]);
+}
+
+function setCfgText1() {
+	setText("game_mode", cfgText1[0]);
+	setText("mode_1",  cfgText1[1]);
+	setText("mode_2",  cfgText1[2]);
+	setText("color_theme", cfgText1[3]);
+	setText("theme_1", cfgText1[4]);
+	setText("theme_2", cfgText1[5]);
+	setText("theme_3", cfgText1[6]);
+    setText("theme_4", cfgText1[7]);
+    setText("energy_saver", cfgText1[8]);
+    setText("audio_disabled", cfgText1[9]);
+    
+ }
+ 
+ function setCfgText2() {
+	setText("winning", cfgText2[0]);
+	setText("speed", cfgText2[1]);
+	setText("r_auto", cfgText2[2]);
+	setText("t_auto", cfgText2[3]);
+	setText("t_vol", cfgText2[4]);
 	setText("c_instr", c_instr);
 	setText("c_hint", c_hint);
 	setText("c_think", c_think);
 	setText("c_github", c_github);
 }
-// Multi-Language
-function setBtnText() {
-	setButton("start", 0, btnText[0]);
-	setButton("mitte", 0, btnText[1]);
-	setButton("stop", 0, btnText[2]);
-	setButton("risiko1", 0, btnText[3]);
-	setButton("risiko2", 0, btnText[3]);
-	setButton("geldeinwurf", 0, btnText[6]);
-	setButton("cfg_button", 0, btnText[7]);
-	setButton("exit1", 0, btnText[8]);
-	setButton("exit2", 0, btnText[8]);
-	setButton("exit3", 0, btnText[8]);
-	setButton("exit4", 0, btnText[8]);
-	setButton("mode_games", 0, btnText[9]);
-	setButton("mode_points", 0, btnText[10]);
-	setButton("theme_green", 0, btnText[11]);
-	setButton("theme_blue", 0, btnText[12]);
-	setButton("theme_petrol", 0, btnText[13]);
-    setButton("theme_black", 0, btnText[14]);
-}
+
 
 function change_game_mode(mode) {
 	var i;
 	var felder_games = ["0", "30", "60", "120", "240", "5 S", "10 S", "20 S", "40 S", "90 S", "0", "20", "40", "80", "160", "3 S", "6 S", "12 S", "25 S", "50 S", "100 S", "10 S", "12 S", "20 S", "25 S", "40 S", "50 S", "90 S", "100 S", "40 M", "50 M", "100 M"];
 	var felder_points = ["0", "30", "60", "120", "240", "500", "1000", "2000", "4000", "9000", "0", "20", "40", "80", "160", "300", "600", "1200", "2500", "5000", "10000", "1000", "1200", "2000", "2500", "4000", "5000", "9000", "10000", "3 MS", "5 MS", "7 MS"];
 	game_mode = mode;
-	if (mode == "games") games = true;
+	if (mode == 1) games = true;
 	else games = false;
 	if (games) {
 		// setText("Typ", "Duomatic: Games")
-        setText("L_Spiele", plfText[4]);;
-		setButton("mode_games", btn_gruen_an);
-		setButton("mode_points", btn_grau_aus);
+		 id("game_mode_games").checked = true;
+		 id("game_mode_games").blur();
+        setText("L_Spiele", plfText[4]);
 		for (i = 0; i <= 31; i++) {
-			setText("feld" + i, felder_games[i]);
+			setTextFelder(i, felder_games[i]);
 		}
 	}
 	else {
 		// setText("Typ", "Duomatic: Points");
 		ss = 0;
+		 id("game_mode_points").checked = true;
+		 id("game_mode_points").blur();
 	    setText("L_Spiele", plfText[9]);
-		setButton("mode_points", btn_gruen_an);
-		setButton("mode_games", btn_grau_aus);
 		for (i = 0; i <= 31; i++) {
-			setText("feld" + i, felder_points[i]);
+			setTextFelder(i, felder_points[i]);
 		}
 	}
 }
@@ -264,34 +319,30 @@ function change_game_mode(mode) {
 function change_color_theme(theme) {
 	color_theme = theme;
 	var bg_color = "#111111";
-	if (theme == "green") {
-		bg_color = bg_gruen;
-		setButton("theme_green", btn_gruen_an);
-		setButton("theme_blue", btn_grau_aus);
-		setButton("theme_petrol", btn_grau_aus);
-		setButton("theme_black", btn_grau_aus);
+	
+	switch (theme) {
+	  case 1:
+		  bg_color = bg_gruen;
+		 id("color_theme_1").checked = true;
+		 id("color_theme_1").blur();
+	  break;
+	  case 2:
+		  bg_color = bg_blau;
+		   id("color_theme_2").checked = true;
+		   id("color_theme_2").blur();
+	  break;
+	  case 3:
+		  bg_color = bg_petrol;
+		  id("color_theme_3").checked = true;
+		 id("color_theme_3").blur();
+	  break;
+	  case 4:
+		  bg_color = bg_black;
+		  id("color_theme_4").checked = true;
+		 id("color_theme_4").blur();
+	  break;
 	}
-	if (theme == "blue") {
-		bg_color = bg_blau;
-		setButton("theme_green", btn_grau_aus);
-		setButton("theme_blue", btn_gruen_an);
-		setButton("theme_petrol", btn_grau_aus);
-				setButton("theme_black", btn_grau_aus);
-	}
-	if (theme == "petrol") {
-		bg_color = bg_petrol;
-		setButton("theme_green", btn_grau_aus);
-		setButton("theme_blue", btn_grau_aus);
-		setButton("theme_petrol", btn_gruen_an);
-				setButton("theme_black", btn_grau_aus);
-	}
-	if (theme == "black") {
-		bg_color = bg_black;
-		setButton("theme_green", btn_grau_aus);
-		setButton("theme_blue", btn_grau_aus);
-		setButton("theme_petrol", btn_grau_aus);
-		setButton("theme_black", btn_gruen_an);
-	}
+	
 	setBgColor("Geraet", bg_color);
 	setBgColor("options", bg_color);
 	setBgColor("instruction", bg_color);
@@ -300,26 +351,41 @@ function change_color_theme(theme) {
 }
 
 function saveSettings() {
+	
+	risiko_win = Number(id("risiko_win").value);
+	spiel_tempo = Number(id("spiel_tempo").value);
+	auto_risiko = Number(id("auto_risiko").value);
+	auto_annahme = Number(id("auto_annahme").value);
+			
+	
 	// Check browser support
 	if (typeof(Storage) !== "undefined") {
-		// Store
+		
 		localStorage.setItem("game_mode", String(game_mode));
 		localStorage.setItem("color_theme", String(color_theme));
 		localStorage.setItem("risiko_win", String(risiko_win));
 		localStorage.setItem("spiel_tempo", String(spiel_tempo));
 		localStorage.setItem("auto_risiko", String(auto_risiko));
 		localStorage.setItem("auto_annahme", String(auto_annahme));
-		setInfo(infoText[0]);
+		localStorage.setItem("volume", String(volume));
+		
+		// Settings  saved
+		
+		setText("alert", alertText[0]);
+		if(auto_annahme <= auto_risiko){ 
+   		setText("alert", alertText[2]);
+	    }
 	}
-	else setInfo("Could not save settings");
+	else setText("alert", alertText[1]);
+	
 }
 
 function loadSettings() {
 	if (localStorage.game_mode) {
-		game_mode = (localStorage.game_mode);
+		game_mode = Number(localStorage.game_mode);
 	}
 	if (localStorage.color_theme) {
-		color_theme = (localStorage.color_theme);
+		color_theme = Number(localStorage.color_theme);
 	}
 	if (localStorage.risiko_win) {
 		risiko_win = Number(localStorage.risiko_win);
@@ -333,39 +399,50 @@ function loadSettings() {
 	if (localStorage.auto_annahme) {
 		auto_annahme = Number(localStorage.auto_annahme);
 	}
+	if (localStorage.volume) {
+		volume = Number(localStorage.volume);
+		audioSprite.volume = volume/100;
+	}
+}
+
+  function showSettings() {
+    // game_mode and color_theme are shown 
+    // in the change_game_mode /change_color_theme
 	id("risiko_win").value = risiko_win;
 	id("rw").value = String(risiko_win) + " %";
 	id("spiel_tempo").value = spiel_tempo;
 	id("spt").value = String(spiel_tempo) + " %";
 	id("auto_risiko").value = auto_risiko;
-	id("ar").value = String(auto_risiko) + cfgText[10];
+	id("ar").value = String(auto_risiko) + cfgText2[5];
 	id("auto_annahme").value = auto_annahme;
-	id("aga").value = String(auto_annahme) + cfgText[10];
+	id("aga").value = String(auto_annahme) + cfgText2[5];
+	id("volume_slider").value = volume;
+	id("volume").value = String(volume) + " %";
 }
 
 function zum_Starten_auffordern() {
 	setInfo(infoText[3]);
-	setButton("start", btn_rot_an);
+	setButton(start_id, btn_rot_an);
 }
 
 function zeige_Geld() {
-	id("Geld").value = String(geld) + ".00";
+	geld_id.value = String(geld) + ".00";
 }
 
 function zeige_Punkte() {
-	id("Punkte").value = String(punkte);
+	punkte_id.value = String(punkte);
 }
 
 function zeige_Gewinn() {
-	id("Gewinn").value = String(gewinn);
+	gewinn_id.value = String(gewinn);
 }
 
 function zeige_Spiele() {
-	id("Spiele").value = String(ss);
+	spiele_id.value = String(ss);
 }
 
 function zeige_Einsatz(esatz) {
-	id("Einsatz").value = String(esatz);
+	einsatz_id.value = String(esatz);
 }
 
 function zeige_Feld(nr, status) {
@@ -411,7 +488,7 @@ function Lichtorgel() {
 	}
 }
 
-function reset() {
+function init() {
 	// setzt die Formularfelder neu, die bei einem reload der Webseite
 	// sonst mit falschen Werten gefüllt bleiben
 	setInfo(infoText[1]);
@@ -425,13 +502,26 @@ function reset() {
 	zeige_Spiele();
 	zeige_Einsatz(einsatz);
 	
+	for (let i = 0; i <= 4; i++) {
+	   scheibe_id[i] = id("scheibe" + i);
+    }
+    for (let i = 0; i <= 31; i++) {
+	   feld_id[i] = id("feld" + i);
+    }
+    
 	loadSettings();
+	showSettings();
 	change_game_mode(game_mode);
 	change_color_theme(color_theme);
+	
 	// For localisation de, en usw.
-	setBtnText();
 	setPfText();
-	setCfgText();
+	setBtnText();
+	setNavText();
+	setCfgText1();
+	setCfgText2();
+	
+	if(testmode) showD("Funktionstest");
 }
 
 function Funktionstest(nr) {
@@ -454,29 +544,29 @@ function Funktionstest(nr) {
 }
 
 function umbuchen_animieren2() {
-	id("Punkte").value = "> > " + String(punkte);
+	punkte_id.value = "> > " + String(punkte);
 	setTimeout(Geld_zu_Punkte, 8 * spiel_tempo);
 }
 
 function umbuchen_animieren1() {
-	id("Punkte").value = "> >   " + String(punkte);
+	punkte_id.value = "> >   " + String(punkte);
 	setInfo(infoText[2]);
 	setTimeout(umbuchen_animieren2, 8 * spiel_tempo);
 }
 
 function Geldeinwurf() {
 	
-	id("geldeinwurf").blur();
+	geldeinwurf_id.blur();
 	geld = geld + 10;
 	zeige_Geld();
-	setButton("geldeinwurf", btn_gruen_aus);
+	setButton(geldeinwurf_id, btn_gruen_aus);
 	setTimeout(umbuchen_animieren1, 8 * spiel_tempo);
 }
 
 function zeige_Scheibe(i, position) {
 	audio_stop();
-	id("scheibe" + i).src = Scheibe[i][position].src;
-	if (i != 2) id("scheibe" + (i + 1)).src = Scheibe[i + 1][position].src;
+	scheibe_id[i].src = Scheibe[i][position].src;
+	if (i != 2) scheibe_id[i+1].src  = Scheibe[i + 1][position].src;
 	if (position != 0) audio_play("walzenstop");
 	// position = 0 entspricht Scheibe löschen, leeres Bild
 }
@@ -485,13 +575,13 @@ function restart_Scheibe_1() {
 	if (!restart) {
 		restart = true;
 		if (!autostart) {
-			setButton("mitte", btn_rot_aus);
+			setButton(mitte_id, btn_rot_aus);
 		}
 		clearTimeout(T1_disc3);
 		zeige_Scheibe(0, 0);
 		if (!test) s1 = Zufallszahl(1, 12);
 		setTimeout("zeige_Scheibe(0, s1);", 7 * spiel_tempo);
-		setTimeout("setButton('stop', btn_rot_an);", 3 * spiel_tempo);
+		setTimeout("setButton(stop_id, btn_rot_an);", 3 * spiel_tempo);
 		T2_disc3 = setTimeout(stop_Scheibe_3, 20 * spiel_tempo);
 	}
 }
@@ -502,10 +592,10 @@ function stop_Scheibe_1() {
 		if (!test) s1 = Zufallszahl(1, 12);
 		zeige_Scheibe(0, s1);
 		if (!autostart) {
-			setButton("mitte", btn_rot_an, btnText[0]);
+			setButton(mitte_id, btn_rot_an, btnText[0]);
 		}
-		setButton("stop", btn_rot_aus);
-		setTimeout("setButton('stop', btn_rot_an);", 3 * spiel_tempo);
+		setButton(stop_id, btn_rot_aus);
+		setTimeout("setButton(stop_id, btn_rot_an);", 3 * spiel_tempo);
 		T1_disc3 = setTimeout(stop_Scheibe_3, 20 * spiel_tempo);
 		// Falls Autostart eingeschaltet und auf Scheibe1 keine Sonne
 		if (autostart && !(s1 == 1 || s1 == 5 || s1 == 9)) {
@@ -526,7 +616,7 @@ function stop_Scheibe_2() {
         }
         
 		zeige_Scheibe(2, s2);
-		setButton("stop", btn_rot_aus);
+		setButton(stop_id, btn_rot_aus);
 		setTimeout(Gewinnermittlung, 20 * spiel_tempo);
 	}
 }
@@ -537,17 +627,17 @@ function stop_Scheibe_3() {
 		if (!test) s3 = Zufallszahl(1, 12);
 		zeige_Scheibe(3, s3);
 		if (!autostart) {
-			setButton("mitte", btn_rot_aus, btnText[1]);
+			setButton(mitte_id, btn_rot_aus, btnText[1]);
 		}
-		setButton("stop", btn_rot_aus);
-		setTimeout("setButton('stop', btn_rot_an);", 3 * spiel_tempo);
+		setButton(stop_id, btn_rot_aus);
+		setTimeout("setButton(stop_id, btn_rot_an);", 3 * spiel_tempo);
 		T_disc2 = setTimeout(stop_Scheibe_2, 15 * spiel_tempo);
 	}
 }
 
 function Scheiben_loeschen() {
 	for (var i = 0; i <= 4; i++) {
-		id("scheibe" + i).src = Scheibe[i][0].src;
+		scheibe_id[i].src = Scheibe[i][0].src;
 	}
 	setTimeout("enableStopBtn();", 3 * spiel_tempo);
 	T_disc1 = setTimeout(stop_Scheibe_1, 15 * spiel_tempo);
@@ -579,35 +669,35 @@ function Geld_zu_Punkte() {
 }
 
 function enableStopBtn() {
-	 id("stop").disabled = false;
-	 setButton("stop", btn_rot_an);
+	 stop_id.disabled = false;
+	 setButton(stop_id, btn_rot_an);
 }
 
 function disableStopBtn() {
-	 id("stop").disabled = true;
-	 setButton("stop", btn_rot_aus);
+	 stop_id.disabled = true;
+	 setButton(stop_id, btn_rot_aus);
 }
 
 function Risikotaste_gedrueckt() {
 	
-	id("risiko1").blur();
-	id("risiko2").blur();
+	risiko1_id.blur();
+	risiko2_id.blur();
 	
 	if (!risikophase) {
 		if (risikoautomatik) {
 			risikoautomatik = false;
 			zeige_Feld(rsr, 0);
 			zeige_Feld(rsl, 0);
-			setButton("risiko1", btn_gelb_aus);
-			setButton("risiko2", btn_gelb_aus);
+			setButton(risiko1_id, btn_gelb_aus);
+			setButton(risiko2_id, btn_gelb_aus);
 			setInfo(infoText[8]);
 		}
 		else {
 			risikoautomatik = true;
 			setze_Risikostufe(5);
 			setze_Risikostufe(15);
-			setButton("risiko1", btn_gelb_auto);
-			setButton("risiko2", btn_gelb_auto);
+			setButton(risiko1_id, btn_gelb_auto);
+			setButton(risiko2_id, btn_gelb_auto);
 			setInfo(infoText[9]);
 		}
 	}
@@ -623,7 +713,7 @@ function risiko_auto() {
 function setze_Risikostufe(rs) {
 	
 	var rsa;
-	id("feld"+rs).blur();
+	feld_id[rs].blur();
 	if (risikoautomatik) {
 		if (rs < 10) {
 			rsa = rsr;
@@ -656,14 +746,14 @@ if (games) {
 function zum_Ende() {
 	test = false;
 	audio_stop();
-	if (autostart) setButton("mitte", btn_rot_auto);
-	else setButton("mitte", btn_rot_aus);
-	setButton("mitte", 0, btnText[1]);
-	setButton("stop", btn_rot_aus, btnText[2]);
+	if (autostart) setButton(mitte_id, btn_rot_auto);
+	else setButton(mitte_id, btn_rot_aus);
+	setButton(mitte_id, 0, btnText[1]);
+	setButton(stop_id, btn_rot_aus, btnText[2]);
 	
 	spiel_laueft_noch = false;
 	if (punkte < einsatz) {
-		setButton("geldeinwurf", btn_gruen_an);
+		setButton(geldeinwurf_id, btn_gruen_an);
 		setTimeout("setInfo(infoText[1]);", 10 * spiel_tempo);
 	}
 	else if (startautomatik && !hoechststufe) {
@@ -711,6 +801,21 @@ function kleine_Ausspielung_rechts() {
 	setTimeout(ausspiel_stop, 20 * spiel_tempo);
 }
 
+function grosse_Ausspielung_manuell() {
+	// start per Button neben Risikoleiter
+  if(!ga && !gewinn_angenommen) {
+    stop_Risiko();
+    if(gs == 16) {
+	   feld_id[16].classList.add("gold_rechts");
+       grosse_Ausspielung_links();
+    }
+    else if(gs == 5) {
+	   feld_id[5].classList.add("gold_links");
+       grosse_Ausspielung_rechts();
+    }
+  }
+}
+
 function grosse_Ausspielung_links() {
 	//   Grosse Ausspielung animieren,
 	//    von 3 bis 100 Sonderspiele
@@ -718,7 +823,7 @@ function grosse_Ausspielung_links() {
 	ga = true;
 	setInfo(infoText[21]);
 	setColor("L_GAL", gelb);
-	gs = ausspiel_gs(15, 50, 16, 15, 17, 10, 18, 10, 19, 10, 20, 5);
+	gs = ausspiel_gs(15, 50, 16, 30, 17, 10, 18, 5, 19, 3, 20, 2);
 	animiere_Ausspielung(15, 20, 15);
 	setTimeout(ausspiel_stop, 40 * spiel_tempo);
 }
@@ -727,7 +832,7 @@ function grosse_Ausspielung_rechts() {
 	ga = true;
 	setColor("L_GAR", gelb);
 	setInfo(infoText[20]);
-	gs = ausspiel_gs(4, 50, 5, 15, 6, 10, 7, 10, 8, 10, 9, 5);
+	gs = ausspiel_gs(4, 50, 5, 30, 6, 10, 7, 5, 8, 3, 9, 2);
 	animiere_Ausspielung(4, 9, 4);
 	setTimeout(ausspiel_stop, 40 * spiel_tempo);
 }
@@ -781,13 +886,13 @@ function starte_Spiel() {
 			hoechststufe = false;
 			clearInterval(intH);
 		}
-		if (startautomatik) setButton("start", btn_rot_auto);
-		else setButton("start", btn_rot_aus);
+		if (startautomatik) setButton(start_id, btn_rot_auto);
+		else setButton(start_id, btn_rot_aus);
 		if (autostart) {
-			setButton("mitte", btn_rot_auto);
+			setButton(mitte_id, btn_rot_auto);
 		}
 		else {
-			setButton("mitte", btn_rot_aus);
+			setButton(mitte_id, btn_rot_aus);
 		}
 		if (risikoautomatik) {
 			zeige_Feld(rsr, 0);
@@ -816,23 +921,29 @@ function starte_Spiel() {
 	}
 	else {
 		setInfo(infoText[1]);
-		setButton("geldeinwurf", btn_gruen_an);
+		setButton(geldeinwurf_id, btn_gruen_an);
 	}
 }
 
 function Starttaste_gedrueckt() {
 	
-	id("start").blur();
+	start_id.blur();
 	
 	if (spiel_laueft_noch) {
-		if (startautomatik) {
+		if((gs == 5 || gs == 16) && !ga) {
+			grosse_Ausspielung_manuell();
+			if(startautomatik) setButton(start_id, btn_rot_auto);
+            else setButton(start_id, btn_rot_aus);
+			
+		}
+		else if (startautomatik) {
 			startautomatik = false;
-			setButton("start", btn_rot_aus);
+			setButton(start_id, btn_rot_aus);
 			setInfo(infoText[4]);
 		}
 		else {
 			startautomatik = true;
-			setButton("start", btn_rot_auto);
+			setButton(start_id, btn_rot_auto);
 			setInfo(infoText[5]);
 		}
 	}
@@ -841,7 +952,7 @@ function Starttaste_gedrueckt() {
 
 function Mittetaste_gedrueckt() {
 	
-	id("mitte").blur();
+	mitte_id.blur();
 	if (risikophase) {
 		Teilgewinn_annehmen();
 	}
@@ -850,19 +961,19 @@ function Mittetaste_gedrueckt() {
 	}
 	else if (autostart) {
 		autostart = false;
-		setButton("mitte", btn_rot_aus);
+		setButton(mitte_id, btn_rot_aus);
 		setInfo(infoText[6]);
 	}
 	else {
 		autostart = true;
-		setButton("mitte", btn_rot_auto);
+		setButton(mitte_id, btn_rot_auto);
 		setInfo(infoText[7]);
 	}
 }
 
 function Stoptaste_gedrueckt() {
 	
-	id("stop").blur();
+	stop_id.blur();
 	if (ausspielung) ausspiel_stop();
 	else if (risikophase) {     
          Gewinn_annehmen();
@@ -973,8 +1084,8 @@ function Gewinn_annehmen() {
 
 function Teilgewinn_freigeben() {
 	teilgewinn_angenommen = false;
-	id("mitte").disabled = false;
-	setButton("mitte", btn_rot_an);
+	mitte_id.disabled = false;
+	setButton(mitte_id, btn_rot_an);
 }
 
 function Teilgewinn_annehmen() {
@@ -989,7 +1100,7 @@ function Teilgewinn_annehmen() {
 		else if (!gewinn_angenommen && ((1 < gs && gs < 9) || (11 < gs && gs < 20))) {
 			
 			teilgewinn_angenommen = true;
-			id("mitte").disabled = true;
+			mitte_id.disabled = true;
 			
 			if (risikophase) stop_Risiko();
 			zeige_Feld(gs + 1, 0);
@@ -1034,21 +1145,25 @@ audio_stop();
 risikophase = false;
 clearInterval(intRisiko);
 
+// Button fuer manuellen Ausspielstart verstecken
+hide("asp_button_rechts");
+hide("asp_button_links");
+
 zeige_Feld(rfeld, 0); 
 if (gs !== ns) zeige_Feld(ns, 0);
 zeige_Feld(gs, 1);
 
 if(risikoautomatik) {
-   setButton("risiko1", btn_gelb_auto);
-   setButton("risiko2", btn_gelb_auto);
+   setButton(risiko1_id, btn_gelb_auto);
+   setButton(risiko2_id, btn_gelb_auto);
 }
 else {
-   setButton("risiko1", btn_gelb_aus);
-   setButton("risiko2", btn_gelb_aus);
+   setButton(risiko1_id, btn_gelb_aus);
+   setButton(risiko2_id, btn_gelb_aus);
 }
 
-setButton("mitte", btn_rot_aus);
-setButton("stop", btn_rot_aus);
+setButton(mitte_id, btn_rot_aus);
+setButton(stop_id, btn_rot_aus);
 	
 }
 
@@ -1056,14 +1171,15 @@ function starte_Risiko() {
 	
 	audio_stop();
 	aktualisiere_Gewinn();
+	ga = false;
 	risikophase = true;
 	riskiert = false;
 	counter = 0;
 	
-	setButton("risiko1", btn_gelb_an);
-	setButton("risiko2", btn_gelb_an);
-	setButton("mitte", 0, btnText[4]);
-	setButton("stop", btn_rot_an, btnText[5]);
+	setButton(risiko1_id, btn_gelb_an);
+	setButton(risiko2_id, btn_gelb_an);
+	setButton(mitte_id, 0, btnText[4]);
+	setButton(stop_id, btn_rot_an, btnText[5]);
 		
 	intRisiko  = setInterval(animiere_Risiko, 500);
 	
@@ -1073,6 +1189,18 @@ function animiere_Risiko() {
 
 	audio_stop();
 	win = win_or_loose();
+	
+	// manuellen Ausspielstart ermoeglichen
+	if(gs == 5)  {
+       feld_id[5].classList.remove("gold_links");
+       show("asp_button_rechts");
+       setButton(start_id, btn_rot_an);
+    }
+	if(gs == 16) {
+	   feld_id[16].classList.remove("gold_rechts");
+       show("asp_button_links");
+       setButton(start_id, btn_rot_an);
+    }
 	
 	rfeld = gs + 1;
 	ns = (gs > 10) ? 10 : 0;
@@ -1090,9 +1218,9 @@ function animiere_Risiko() {
 	}
 	
 	if ((1 < gs && gs < 9) || (11 < gs && gs < 20)) {
-			setButton("mitte", btn_rot_an);
+			setButton(mitte_id, btn_rot_an);
 	}
-	else setButton("mitte", btn_rot_aus);
+	else setButton(mitte_id, btn_rot_aus);
 		
 		// automatische Gewinnannahme
 	counter = counter + 1;
@@ -1131,7 +1259,7 @@ function animiere_Ausspielung(avon, abis, afeld) {
 	von = avon;
 	bis = abis;
 
-	setButton("stop", btn_rot_an, btnText[2]);
+	setButton(stop_id, btn_rot_an, btnText[2]);
 	
 	if (afeld == bis + 1) afeld = von;
 	if (ga) { // grosse A. andere Reihenfolge

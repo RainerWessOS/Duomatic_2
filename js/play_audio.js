@@ -12,6 +12,8 @@ var audioSprite = new Audio();
        audioSprite.src = "sound/audio_sprite.mp3";
        audioSprite.load();
        audioSprite.pause();
+       
+ var audioEnabled = true;
 
 // define the sprites
 var spriteData = {
@@ -62,7 +64,7 @@ audioSprite.addEventListener('timeupdate', onTimeUpdate, false);
 
 // in mobile Safari, the first time this is called will load the audio. Ideally, we'd load the audio file completely before doing this.
 var audio_play = function(id) {
-    if (spriteData[id] && spriteData[id].length) {
+    if (audioEnabled && spriteData[id] && spriteData[id].length) {
     	audioSprite.pause();
         currentSprite = spriteData[id];
         audioSprite.currentTime = currentSprite.start;
@@ -82,7 +84,9 @@ var audio_play = function(id) {
 
 // sometimes, we want it just quiet and don't care which sprite is playing
 var audio_stop = function() {
+	if(audioEnabled) {
     	audioSprite.pause();
+    }
 };
 
 // ENDE
