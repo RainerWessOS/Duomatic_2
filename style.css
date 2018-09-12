@@ -1,48 +1,48 @@
 /* Stylesheet for Daddelkiste Duomatic - Version 1.0 */
 
 body {
-  margin: 0px;
+  margin: auto,;
   padding: 0px;
-  font-size: 16px;
+  font-size: 20px;
   font-family: Verdana;
   text-align: center;
-  align: center;
   color: white;
-  background-color: black;
+  background: black;
   
   /* for disabling text selection */
-  user-select: none;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -ms-user-select: none;
-  -webkit-user-select: none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 
 img {
   border: 0px;
 }
 
-/* Verstecktes Testmenue  
-von hidden auf visible setzen */
+/* Testmenu  for software developer  */
 
 #Funktionstest {
-	 visibility: hidden;
-	 // visibility: visible;
+	display: none;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 }
 
-#Geraet_div {
-	position: absolute
+#Geraet_div {  
+	position: relative;
 	margin:auto;
-	align: center;
 }
+
 	
 #Geraet {
   border: 10px solid #333333;
   border-radius: 10px;
   border-collapse: collapse;
   top: 10px;
-  padding: 0;
-  spacing: 0;
+  padding: 0px;
+  spacing: 0px;
   background-color: #111111;
 }
 
@@ -57,7 +57,7 @@ von hidden auf visible setzen */
 }
 
 .multifeld {
-  background-image: url("images/risiko_passiv.gif");
+  background-image: url("images/risiko_passiv.png");
   background-position: center;
   background-repeat: no-repeat;
   width: 80px;
@@ -90,13 +90,13 @@ von hidden auf visible setzen */
 }
 
 .muster1 {
-  background-image: url("images/GA_links2.gif");
+  background-image: url("images/GA_links2.png");
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .muster2 {
-  background-image: url("images/GA_links2.gif");
+  background-image: url("images/GA_links2.png");
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -125,7 +125,7 @@ von hidden auf visible setzen */
 	border-left: 3px solid gold;
 }
 .risikofeld {
-  background-image: url("images/risiko_passiv.gif");
+  background-image: url("images/risiko_passiv.png");
   background-position: center;
   background-repeat: no-repeat;
   width: 80px;
@@ -163,13 +163,13 @@ von hidden auf visible setzen */
 }
 
 .muster4 {
-  background-image: url("images/GA_rechts1.gif");
+  background-image: url("images/GA_rechts1.png");
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .muster5 {
-  background-image: url("images/GA_rechts2.gif");
+  background-image: url("images/GA_rechts2.png");
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -201,7 +201,6 @@ von hidden auf visible setzen */
   font-weight: bold;
   font-style: italic;
   text-align: center;
-  // transform: rotate(-2deg)
 }
 
 #GA_Tabelle {
@@ -213,7 +212,7 @@ von hidden auf visible setzen */
 }
 
 .muster3 {
-  background-image: url("images/GA.gif");
+  background-image: url("images/GA.png");
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -233,6 +232,16 @@ von hidden auf visible setzen */
   font-weight: bold;
   color: white;
   text-align: center;
+  height: 50px;
+}
+
+#alert {
+  font-size: 16px;
+  font-family: Verdana;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  margin:30px;
   height: 50px;
 }
 
@@ -351,10 +360,11 @@ main {
 }
 
 .test_button {
-  height: 50px;
-  font-size: 16px;
-  background-color: #4D8080;
+  height: 80px;
+  font-size: 18px;
+  background-color: #333333;
   border: 1px solid #FFF;
+  border-radius: 20px;
   color: white;
   text-align: center;
 }
@@ -364,9 +374,10 @@ main {
   padding: 20px;
   margin: 20px;
   color: white;
+  font-size: 18px;
   text-align: left;
   align: center;
-  width: 725px; // 750
+  width: 725px;
   z-index: 5;
   background: #005500;
   border: 2px solid #F00;
@@ -381,7 +392,7 @@ main {
 
 ul.topnav {
   list-style-type: none;
-  font-size:18px;
+  font-size:20px;
   font-weight: bold;
   margin: 0;
   padding: 0;
@@ -419,19 +430,32 @@ ul.topnav li a.active {
 
 .config {
   color: #FFFFFF;
-  font-size: 16px;
+  font-size: 20px;
   font-family: Verdana;
   font-weight: bold;
   margin-left: 50px;
 }
 
-.mode_button {
-    height: 50px;
-    width: 190px;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
+.asp_button {
+  color: #FFFFFF;
+  background: red;
+  font-size: 20px;
+  font-family: Verdana;
+  font-weight: bold;
+  width: 78px;
+  height: 48px;
+  border: 1px solid #666666;
+  border-radius: 10px;
+}
+
+#asp_button_links {
+	visibility: hidden;
+}
+
+#asp_button_rechts {
+	visibility: hidden;
+}
+ 
 .tabcolor {
 	width: 190px;
 	height: 50px;
@@ -439,12 +463,24 @@ ul.topnav li a.active {
     border: 5px solid #333333;
 }
 
+.save_button {
+  display: inline;
+  position: relative;
+  color: #FFFFFF;
+  text-align: center;
+  height: 50px;
+  width: 200px;
+  left: 70px;
+}
+
 .config_button {
+  display: inline;
+  position: relative;
   color: #FFFFFF;
   text-align: center;
   height: 50px;
   width: 160px;
-  margin-left: 280px;
+  left: 280px;
 }
 
 .links {
@@ -474,34 +510,109 @@ ul.topnav li a.active {
   background-color: #000000;
 }
 
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 30px;
- /* Set a specific slider handle width */
-  height: 30px;
- /* Slider handle height */
-  background: #4d8080;
-}
+  input[type=checkbox] { 
+       -webkit-appearance: none;
+       -moz-appearance: none;
+      cursor: pointer; 
+      background: transparent; 
+      border: 1px solid white;
+      border-radius: 5px;
+      width: 50px;
+      height: 50px;
+      margin-right: 20px;
+      vertical-align: middle;
+  } 
+  
+  input[type=checkbox]:checked { 
+     background: Red; 
+  }
 
-.slider::-moz-range-thumb {
-  width: 30px;
- /* Set a specific slider handle width */
-  height: 30px;
- /* Slider handle height */
-  background: #009900;
+  input[type=radio] { 
+       -webkit-appearance: none;
+       -moz-appearance: none;
+      cursor: pointer; 
+      background: transparent; 
+      border: 1px solid white;
+      border-radius: 5px;
+      width: 50px;
+      height: 50px;
+      margin-right: 20px;
+      vertical-align: middle;
+  } 
+  
+  input[type=radio]:checked { 
+     background: Red; 
+  }
+  
+  input[type=range] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 200px;
+    margin-top: 12px; 
+    margin-bottom:5px;
+     margin-right: 15px;
+    vertical-align: middle; 
+    border: 0;
+    background: transparent;
+  }
+
+  input[type=range]:focus {
+    outline: none;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    margin-top: -11px;
+    border: 1px solid white;
+    border-radius: 5px;
+    box-shadow: 3px 3px #303030;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background: red;
+  }
+
+  input[type=range]::-webkit-slider-runnable-track {
+    height: 8px;
+    background: green;
+    cursor: pointer;
+  }
+
+  input[type=range]::-moz-range-thumb {
+    border: 1px solid white;
+    border-radius: 5px;
+    box-shadow: 3px 3px #303030;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background: red;
+  }
+
+  input[type=range]::-moz-range-track {
+    height: 8px;
+    background: green;
+    cursor: pointer;
+  }
+
+  input[type=range]::-ms-thumb {
+    border: 1px solid white;
+    border-radius: 5px;
+    box-shadow: 3px 3px #303030;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background: red;
   }
 
 #c_anl {
-  font-size: 16px;
+  font-size: 20px;
   font-family: Verdana;
 }
 	
 a.git  { 
   font-family: Verdana;
   font-weight: bold;
-  font-size:16px;
-  Color: #FFCC00;
+  font-size: 20px;
+  color: #FFCC00;
 }
 
 .tdw80h25 {
@@ -561,5 +672,5 @@ a.git  {
   height: 250px;
 }
 
-// END
+/* END */
 	
